@@ -3,6 +3,7 @@ import Vitrine from './pages/vitrine.jsx';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import Detalhes from './pages/Detalhes';
+import Dashboard from './pages/Dashboard.jsx';
 
 // Componente para Proteger Rotas (Só entra se tiver o token no localStorage)
 const RotaPrivada = ({ children }) => {
@@ -19,6 +20,10 @@ function App() {
         <Route path="/produto/:id" element={<Detalhes />} /> {/* Nova Rota de Detalhes */}
 
         {/* Rotas Protegidas (Só entra com senha) */}
+        {/* Nova rota principal do Admin */}
+        <Route path="/admin/dashboard" element={
+          <RotaPrivada><Dashboard /></RotaPrivada>
+        } />
         <Route path="/admin/novo" element={
           <RotaPrivada><Admin /></RotaPrivada>
         } />
