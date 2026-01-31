@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import api from '../api';
+import api from '../../frontend/src/api';
 import { Link } from 'react-router-dom';
 
 function Vitrine() {
