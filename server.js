@@ -13,7 +13,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Conexão com MongoDB (Substitua pela sua string de conexão local ou Atlas)
+// Conexão com MongoDB 
 mongoose.connect(process.env.MONGO_URI || 'mongodb://localhost:27017/vintage_audio')
   .then(() => console.log('MongoDB Conectado!'))
   .catch(err => console.error('Erro ao conectar:', err));
@@ -75,6 +75,22 @@ app.get('/api/categorias', async (req, res) => {
   try {
     const categorias = await Categoria.find();
     res.json(categorias);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
+// ROTA NOVA: Buscar UM produto pelo ID (Para a tela de Detalhes)
+app.get('/api/produtos/:id', async (req, res) => {
+  try {
+    // Busca o produto e traz os dados da categoria juntos (.populate)
+    const produto = await Produto.findById(req.params.id).populate('categoria');
+    
+    if (!produto) {
+      return res.status(404).json({ message: 'Produto não encontrado' });
+    }
+    
+    res.json(produto);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
