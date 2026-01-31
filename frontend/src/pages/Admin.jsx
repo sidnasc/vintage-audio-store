@@ -1,14 +1,16 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import api from '../api';
+import Navbar from '../components/Navbar';
 
 function Admin() {
+  // Adicionei 'descricao' no estado inicial
   const [form, setForm] = useState({
-    nome: '', marca: '', preco: '', imagemUrl: '', categoria: ''
+    nome: '', marca: '', preco: '', imagemUrl: '', categoria: '', descricao: ''
   });
   const [categorias, setCategorias] = useState([]);
   const navigate = useNavigate();
-  const { id } = useParams(); // Pega o ID da URL se for edição
+  const { id } = useParams();
 
   useEffect(() => {
     carregarCategorias();
@@ -18,17 +20,25 @@ function Admin() {
   }, [id]);
 
   const carregarCategorias = async () => {
-    const res = await api.get('/categorias');
-    setCategorias(res.data);
+    try {
+      const res = await api.get('/categorias');
+      setCategorias(res.data);
+    } catch (erro) {
+      console.error("Erro categorias", erro);
+    }
   };
 
   const carregarDadosProduto = async () => {
-    const res = await api.get(`/produtos/${id}`); // Busca detalhes para edição
-    // Ajuste para preencher o form corretamente (depende da estrutura do seu backend)
-    setForm({
+    try {
+      const res = await api.get(`/produtos/${id}`);
+      setForm({
         ...res.data,
-        categoria: res.data.categoria?._id || res.data.categoria // Garante pegar só o ID
-    });
+        categoria: res.data.categoria?._id || res.data.categoria || '',
+        descricao: res.data.descricao || '' // Garante que carregue a descrição
+      });
+    } catch (erro) {
+      alert("Erro ao carregar produto");
+    }
   };
 
   const handleChange = (e) => {
@@ -39,41 +49,70 @@ function Admin() {
     e.preventDefault();
     try {
       if (id) {
-        await api.put(`/produtos/${id}`, form); // Update 
-        alert('Equipamento atualizado!');
+        await api.put(`/produtos/${id}`, form);
+        alert('Atualizado com sucesso!');
       } else {
-        await api.post('/produtos', form); // Create 
-        alert('Equipamento cadastrado!');
+        await api.post('/produtos', form);
+        alert('Cadastrado com sucesso!');
       }
-      navigate('/'); // Volta para a vitrine
+      navigate('/');
     } catch (erro) {
-      alert('Erro ao salvar: ' + erro.message);
+      alert('Erro: ' + erro.message);
     }
   };
 
   return (
-    <div style={{ padding: '20px', maxWidth: '500px', margin: 'auto' }}>
-      <h2>{id ? 'Editar Equipamento' : 'Novo Equipamento'}</h2>
-      <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-        
-        <input name="nome" placeholder="Nome (ex: Receiver Akai)" value={form.nome} onChange={handleChange} required />
-        <input name="marca" placeholder="Marca (ex: Polyvox)" value={form.marca} onChange={handleChange} required />
-        <input name="preco" type="number" placeholder="Preço" value={form.preco} onChange={handleChange} required />
-        <input name="imagemUrl" placeholder="URL da Imagem" value={form.imagemUrl} onChange={handleChange} />
-        
-        <select name="categoria" value={form.categoria} onChange={handleChange} required>
-          <option value="">Selecione a Categoria</option>
-          {categorias.map(cat => (
-            <option key={cat._id} value={cat._id}>{cat.nome}</option>
-          ))}
-        </select>
+    <>
+      <Navbar />
+      <div className="container">
+        <div className="form-container">
+          <h2 style={{ textAlign: 'center', marginBottom: '20px' }}>
+            {id ? 'Editar Equipamento' : 'Novo Equipamento'}
+          </h2>
+          {/* O ID está escondido na URL e na lógica, não aparece aqui no visual */}
+          
+          <form onSubmit={handleSubmit}>
+            <label>Nome:</label>
+            <input name="nome" value={form.nome} onChange={handleChange} required />
 
-        <button type="submit" style={{ padding: '10px', marginTop: '10px' }}>
-          {id ? 'Salvar Alterações' : 'Cadastrar'}
-        </button>
-      </form>
-      <button onClick={() => navigate('/')} style={{ marginTop: '10px' }}>Cancelar</button>
-    </div>
+            <label>Marca:</label>
+            <input name="marca" value={form.marca} onChange={handleChange} required />
+
+            <div style={{ display: 'flex', gap: '10px' }}>
+              <div style={{ flex: 1 }}>
+                <label>Preço:</label>
+                <input name="preco" type="number" value={form.preco} onChange={handleChange} required />
+              </div>
+              <div style={{ flex: 1 }}>
+                <label>Categoria:</label>
+                <select name="categoria" value={form.categoria} onChange={handleChange} required>
+                  <option value="">Selecione...</option>
+                  {categorias.map(cat => (
+                    <option key={cat._id} value={cat._id}>{cat.nome}</option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
+            <label>Características / Descrição Técnica:</label>
+            <textarea 
+              name="descricao"
+              rows="5"
+              placeholder="Ex: Potência de 50W por canal, entradas Phono, ano 1978..."
+              value={form.descricao}
+              onChange={handleChange}
+              style={{ width: '100%', padding: '10px', marginBottom: '15px', border: '1px solid #ddd', borderRadius: '4px', fontFamily: 'inherit' }}
+            />
+
+            <label>URL da Imagem:</label>
+            <input name="imagemUrl" value={form.imagemUrl} onChange={handleChange} />
+
+            <button type="submit" className="btn-primary">Salvar</button>
+            <button type="button" className="btn-danger" style={{ width: '100%', marginTop: '10px' }} onClick={() => navigate('/')}>Cancelar</button>
+          </form>
+        </div>
+      </div>
+    </>
   );
 }
 

@@ -19,43 +19,56 @@ function Detalhes() {
   return (
     <>
       <Navbar />
-      <div className="container" style={{ display: 'flex', gap: '40px', marginTop: '30px' }}>
+      <div className="container" style={{ marginTop: '30px' }}>
         
-        {/* Lado Esquerdo: Imagem Grande */}
-        <div style={{ flex: 1 }}>
-          <img 
-            src={produto.imagemUrl || 'https://via.placeholder.com/600x400'} 
-            alt={produto.nome} 
-            style={{ width: '100%', borderRadius: '8px', border: '1px solid #ddd' }}
-          />
-        </div>
-
-        {/* Lado Direito: Informações */}
-        <div style={{ flex: 1 }}>
-          <small style={{ textTransform: 'uppercase', color: '#888', letterSpacing: '1px' }}>
-            {produto.marca}
-          </small>
-          <h1 style={{ margin: '10px 0', fontSize: '2.5rem' }}>{produto.nome}</h1>
-          <h2 style={{ color: '#d35400', fontSize: '2rem' }}>
-            R$ {Number(produto.preco).toFixed(2)}
-          </h2>
-
-          <div style={{ marginTop: '30px', padding: '20px', background: 'white', borderRadius: '8px' }}>
-            <h3>Ficha Técnica</h3>
-            <ul style={{ listStyle: 'none', padding: 0, lineHeight: '2' }}>
-              <li><strong>Categoria:</strong> {produto.categoria?.nome || 'Geral'}</li>
-              {/* Se você adicionou especificações no banco, mostraria aqui. 
-                  Como é MVP, vamos mostrar dados estáticos ou o que tiver. */}
-              <li><strong>ID do Produto:</strong> {produto._id}</li>
-            </ul>
+        <div style={{ display: 'flex', gap: '40px', flexWrap: 'wrap' }}>
+          
+          {/* Lado Esquerdo: Imagem */}
+          <div style={{ flex: 1, minWidth: '300px' }}>
+            <img 
+              src={produto.imagemUrl || 'https://via.placeholder.com/600x400'} 
+              alt={produto.nome} 
+              style={{ width: '100%', borderRadius: '8px', border: '1px solid #ddd', boxShadow: '0 4px 8px rgba(0,0,0,0.1)' }}
+            />
           </div>
 
-          <button 
-            onClick={() => navigate('/')} 
-            style={{ marginTop: '20px', padding: '10px 30px', background: 'transparent', border: '1px solid #333' }}
-          >
-            ← Voltar para a Loja
-          </button>
+          {/* Lado Direito: Informações */}
+          <div style={{ flex: 1, minWidth: '300px' }}>
+            <small style={{ textTransform: 'uppercase', color: '#888', letterSpacing: '1px', fontWeight: 'bold' }}>
+              {produto.marca}
+            </small>
+            
+            <h1 style={{ margin: '10px 0', fontSize: '2.5rem', lineHeight: '1.2' }}>
+              {produto.nome}
+            </h1>
+            
+            <h2 style={{ color: '#d35400', fontSize: '2rem', margin: '20px 0' }}>
+              R$ {Number(produto.preco).toFixed(2)}
+            </h2>
+
+            <div style={{ padding: '20px', background: 'white', borderRadius: '8px', border: '1px solid #eee' }}>
+              <h3 style={{ marginTop: 0 }}>Especificações Técnicas</h3>
+              
+              <ul style={{ listStyle: 'none', padding: 0, lineHeight: '1.6', color: '#555' }}>
+                <li style={{ marginBottom: '10px' }}>
+                  <strong>Categoria:</strong> {produto.categoria?.nome || 'Geral'}
+                </li>
+                
+                {/* AQUI ESTÁ A MUDANÇA: Tiramos o ID e pusemos a Descrição */}
+                <li style={{ whiteSpace: 'pre-wrap' }}>
+                  {produto.descricao ? produto.descricao : 'Nenhuma descrição técnica informada para este equipamento.'}
+                </li>
+              </ul>
+            </div>
+
+            <button 
+              onClick={() => navigate('/')} 
+              className="btn-primary"
+              style={{ marginTop: '20px', width: 'auto', padding: '10px 40px' }}
+            >
+              ← Voltar para a Loja
+            </button>
+          </div>
         </div>
       </div>
     </>

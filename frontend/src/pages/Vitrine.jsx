@@ -56,9 +56,10 @@ function Vitrine() {
                 {localStorage.getItem('usuarioLogado') && (
                   <div style={{ marginTop: '10px', display: 'flex', gap: '5px' }}>
                     <Link to={`/admin/editar/${prod._id}`} style={{ flex: 1 }}>
-                      <button style={{ width: '100%', fontSize: '0.8rem' }}>Editar</button>
+                      <button className="btn-danger" style={{ width: '100%', borderColor: '#d35400', color: '#d35400' }}>
+                        Editar (Admin)
+                      </button>
                     </Link>
-                    {/* Botão de excluir... */}
                     </div>
                   )}
                 </div>
