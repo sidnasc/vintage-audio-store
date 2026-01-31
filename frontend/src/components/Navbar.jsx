@@ -22,7 +22,7 @@ function Navbar() {
         {/* Se estiver logado, mostra o acesso ao Admin. Se não, mostra Login */}
         {isLogado ? (
           <>
-            <Link to="/admin/novo" style={{ color: '#d35400' }}>Gerenciar Loja</Link>
+            <Link to="/admin/dashboard" style={{ color: '#d35400' }}>Gerenciar Loja</Link>
             <button onClick={handleLogout} className="btn-danger" style={{ margin: 0 }}>Sair</button>
           </>
         ) : (
