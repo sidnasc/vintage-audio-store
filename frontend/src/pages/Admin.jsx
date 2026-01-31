@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import api from '../../frontend/src/api';
+import api from '../api';
 
 function Admin() {
   const [form, setForm] = useState({

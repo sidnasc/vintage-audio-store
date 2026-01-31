@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import Vitrine from '../../src/pages/vitrine';
-import Admin from '../../src/pages/Admin';
+import Vitrine from './pages/Vitrine';
+import Admin from './pages/Admin';
 
 function App() {
   return (

@@ -5,7 +5,10 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js"
+    "start": "node server.js",
+    "server": "node server.js",
+    "client": "npm run dev --prefix frontend",
+    "dev": "concurrently \"npm run server\" \"npm run client\"" 
   },
   "repository": {
     "type": "git",
@@ -24,5 +27,10 @@
     "dotenv": "^17.2.3",
     "express": "^5.2.1",
     "mongoose": "^9.1.5"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
   }
+  
 }
+
