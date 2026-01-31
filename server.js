@@ -70,6 +70,16 @@ app.delete('/api/produtos/:id', async (req, res) => {
   }
 });
 
+// ROTA QUE FALTOU: Listar Categorias
+app.get('/api/categorias', async (req, res) => {
+  try {
+    const categorias = await Categoria.find();
+    res.json(categorias);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+});
+
 // Iniciar Servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
