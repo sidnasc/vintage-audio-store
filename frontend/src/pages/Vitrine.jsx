@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import api from '../api';
 import Navbar from '../components/Navbar'; // Importando o menu
 
@@ -47,8 +48,19 @@ function Vitrine() {
                   <div className="preco">
                     R$ {Number(prod.preco).toFixed(2)}
                   </div>
-
+                <Link to={`/produto/${prod._id}`}>
                   <button className="btn-primary">Ver Detalhes</button>
+                </Link>
+
+                {/* Só mostra os botões de editar/excluir se estiver logado */}
+                {localStorage.getItem('usuarioLogado') && (
+                  <div style={{ marginTop: '10px', display: 'flex', gap: '5px' }}>
+                    <Link to={`/admin/editar/${prod._id}`} style={{ flex: 1 }}>
+                      <button style={{ width: '100%', fontSize: '0.8rem' }}>Editar</button>
+                    </Link>
+                    {/* Botão de excluir... */}
+                    </div>
+                  )}
                 </div>
               </div>
             ))}
