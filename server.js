@@ -121,6 +121,14 @@ app.get('/api/criar-categorias-iniciais', async (req, res) => {
   }
 });
 
+app.get('/', (req, res) => {
+  res.send('API da Loja Vintage rodando! 🚀 Acesse /api/produtos para ver os dados.');
+});
+
+// Iniciar Servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, ...);
+
 // Iniciar Servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
