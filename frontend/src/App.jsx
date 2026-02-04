@@ -1,11 +1,11 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
-import Vitrine from './pages/vitrine.jsx';
+import Vitrine from './pages/Vitrine';
 import Admin from './pages/Admin';
 import Login from './pages/Login';
 import Detalhes from './pages/Detalhes';
-import Dashboard from './pages/Dashboard.jsx';
+import Dashboard from './pages/Dashboard';
 
-// Componente para Proteger Rotas (Só entra se tiver o token no localStorage)
+// Componente para Proteger Rotas
 const RotaPrivada = ({ children }) => {
   const isLogado = localStorage.getItem('usuarioLogado');
   return isLogado ? children : <Navigate to="/login" />;
@@ -15,12 +15,12 @@ function App() {
   return (
     <BrowserRouter>
       <Routes>
+        {/* Rotas Públicas */}
         <Route path="/" element={<Vitrine />} />
         <Route path="/login" element={<Login />} />
-        <Route path="/produto/:id" element={<Detalhes />} /> {/* Nova Rota de Detalhes */}
+        <Route path="/produto/:id" element={<Detalhes />} />
 
-        {/* Rotas Protegidas (Só entra com senha) */}
-        {/* Nova rota principal do Admin */}
+        {/* Rotas Privadas (Admin) */}
         <Route path="/admin/dashboard" element={
           <RotaPrivada><Dashboard /></RotaPrivada>
         } />

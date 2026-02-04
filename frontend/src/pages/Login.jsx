@@ -11,7 +11,7 @@ function Login() {
     // Senha simples para o trabalho acadêmico
     if (senha === 'admin123') {
       localStorage.setItem('usuarioLogado', 'true'); // Salva que está logado
-      navigate('/admin/novo'); // Manda para o cadastro (agora rota protegida)
+      navigate('/admin/dashboard'); // Manda para o cadastro (agora rota protegida)
     } else {
       alert('Senha incorreta!');
     }

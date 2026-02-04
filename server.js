@@ -96,6 +96,31 @@ app.get('/api/produtos/:id', async (req, res) => {
   }
 });
 
+// Acesse essa rota no navegador UMA VEZ para encher o banco
+app.get('/api/criar-categorias-iniciais', async (req, res) => {
+  try {
+    // 1. Verifica se já existem para não duplicar
+    const count = await Categoria.countDocuments();
+    if (count > 0) {
+      return res.send('⚠️ O banco já possui categorias cadastradas!');
+    }
+
+    // 2. Cria as categorias padrão
+    await Categoria.insertMany([
+      { nome: 'Receivers' },
+      { nome: 'Toca-Discos' },
+      { nome: 'Caixas Acústicas' },
+      { nome: 'Amplificadores' },
+      { nome: 'Tape Decks' },
+      { nome: 'Acessórios' }
+    ]);
+    
+    res.send('✅ Sucesso! Categorias criadas: Receivers, Toca-Discos, Caixas, etc.');
+  } catch (erro) {
+    res.status(500).send('❌ Erro ao criar: ' + erro.message);
+  }
+});
+
 // Iniciar Servidor
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));

@@ -19,7 +19,7 @@ const ProdutoSchema = new mongoose.Schema({
     ref: 'Categoria'
   }, 
 
-  descricao: String, // Agora ele está no lugar certo (na raiz do produto)
+  descricao: String, 
 
   dataCadastro: { type: Date, default: Date.now }
 });

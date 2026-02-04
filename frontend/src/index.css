@@ -1,166 +1,93 @@
-/* --- TEMA VINTAGE AUDIO --- */
 :root {
-  --bg-color: #f4f1ea;       /* Creme estilo papel antigo */
-  --card-bg: #ffffff;        /* Branco para destacar os produtos */
-  --text-primary: #2c3e50;   /* Azul escuro quase preto */
-  --accent-color: #d35400;   /* Laranja queimado (Rust) para botões */
-  --border-color: #dcdcdc;
-  --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  background-color: #f4f4f9; /* Fundo Creme/Cinza claro */
+  color: #333;
 }
 
 body {
   margin: 0;
-  font-family: var(--font-main);
-  background-color: var(--bg-color);
-  color: var(--text-primary);
-  -webkit-font-smoothing: antialiased;
+  min-width: 320px;
+  min-height: 100vh;
 }
 
-/* Container Principal */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-/* --- NAVBAR (Cabeçalho) --- */
+/* Navbar */
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 20px 0;
-  border-bottom: 2px solid var(--text-primary);
-  margin-bottom: 40px;
+  padding: 1rem 2rem;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  margin-bottom: 2rem;
 }
 
 .logo {
-  font-size: 1.8rem;
+  font-size: 1.5rem;
   font-weight: bold;
-  letter-spacing: -1px;
-  text-transform: uppercase;
-  color: var(--text-primary);
   text-decoration: none;
+  color: #2c3e50;
 }
 
 .nav-links a {
   margin-left: 20px;
   text-decoration: none;
-  color: var(--text-primary);
+  color: #34495e;
   font-weight: 500;
 }
 
-.nav-links a:hover {
-  color: var(--accent-color);
-}
-
-/* --- GRID DE PRODUTOS (Vitrine) --- */
-.produtos-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); /* Responsivo */
-  gap: 30px;
-}
-
-/* --- CARD DO PRODUTO --- */
-.card {
-  background: var(--card-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 8px;
-  overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-  display: flex;
-  flex-direction: column;
-}
-
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-}
-
-.card img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover; /* Garante que a foto não estique */
-  background-color: #eee;
-}
-
-.card-info {
-  padding: 20px;
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
-.card h3 {
-  margin: 0 0 10px;
-  font-size: 1.2rem;
-}
-
-.card .marca {
-  color: #7f8c8d;
-  font-size: 0.9rem;
-  text-transform: uppercase;
-  letter-spacing: 1px;
-  margin-bottom: 5px;
-}
-
-.card .preco {
-  font-size: 1.4rem;
-  font-weight: bold;
-  color: var(--accent-color);
-  margin-top: auto; /* Empurra o preço para baixo */
-  padding-top: 15px;
-}
-
-/* --- BOTÕES --- */
+/* Botões */
 button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
   cursor: pointer;
-  border: none;
-  border-radius: 4px;
-  padding: 10px 20px;
-  font-size: 1rem;
-  transition: background 0.3s;
-}
-
-.btn-primary {
-  background-color: var(--accent-color);
-  color: white;
-  width: 100%;
+  transition: border-color 0.25s;
   margin-top: 10px;
 }
 
-.btn-primary:hover {
-  background-color: #e67e22;
+.btn-primary {
+  background-color: #2c3e50;
+  color: white;
 }
 
 .btn-danger {
   background-color: transparent;
-  color: #e74c3c;
   border: 1px solid #e74c3c;
-  margin-top: 10px;
-  font-size: 0.8rem;
-  padding: 5px 10px;
+  color: #e74c3c;
 }
 
-.btn-danger:hover {
-  background-color: #e74c3c;
-  color: white;
-}
-
-/* --- FORMULÁRIO (Admin) --- */
+/* Formulários */
 .form-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   max-width: 500px;
   margin: 0 auto;
-  background: white;
-  padding: 30px;
-  border-radius: 8px;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
 }
 
-input, select {
+input, select, textarea {
   width: 100%;
-  padding: 12px;
-  margin-bottom: 15px;
-  border: 1px solid #ddd;
+  padding: 10px;
+  margin: 8px 0 20px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  box-sizing: border-box; /* Garante que o padding não aumente a largura */
+  box-sizing: border-box;
+}
+
+label {
+  font-weight: bold;
+  color: #555;
 }
