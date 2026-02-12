@@ -1,4 +1,3 @@
-```markdown
 # 🎵 Vintage Audio Store
 
 Sistema Full Stack desenvolvido para o gerenciamento e vitrine de uma loja especializada em equipamentos de áudio vintage (receivers, caixas acústicas, etc.).
@@ -120,4 +119,3 @@ Projeto acadêmico para fins de estudo em Desenvolvimento Web Full Stack.
 
 ```
 
-```
