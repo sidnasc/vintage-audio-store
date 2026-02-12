@@ -61,6 +61,27 @@ function Admin() {
       alert('Erro: ' + erro.message);
     }
   };
+// Função para criar categoria sem sair da tela
+  const handleCriarCategoria = async () => {
+    if (!novaCategoria) return alert("Digite o nome da categoria!");
+
+    try {
+      const res = await api.post('/categorias', { nome: novaCategoria });
+      
+      // 1. Adiciona a nova categoria na lista que já existe
+      setCategorias([...categorias, res.data]);
+      
+      // 2. Já deixa ela selecionada no formulário
+      setForm({ ...form, categoria: res.data._id });
+      
+      // 3. Limpa o campozinho
+      setNovaCategoria("");
+      alert(`Categoria "${res.data.nome}" criada!`);
+    } catch (error) {
+      console.error("Erro ao criar categoria:", error);
+      alert("Erro ao criar categoria.");
+    }
+  };
 
   return (
     <>
