@@ -56,39 +56,79 @@ cd vintage-audio-store
 
 ```
 
-### 2. Configurar o Backend
+### 2. Configurar o Backend (Servidor)
 
-Abra um terminal na pasta raiz do projeto:
-
+1. **Instalar Dependências:**
+No terminal, na pasta raiz do projeto:
 ```bash
-# Instalar dependências do servidor
 npm install
 
-# Iniciar o servidor (Porta 3000)
+```
+
+
+2. **Configurar Variáveis de Ambiente (.env):**
+Crie um arquivo chamado `.env` na raiz do projeto e adicione:
+```ini
+PORT=3000
+MONGO_URI=mongodb://127.0.0.1:27017/vintage_audio
+
+```
+
+
+3. **Popular o Banco de Dados (Categorias Iniciais):**
+Inicie o servidor e acesse a rota de configuração para criar as categorias básicas (Receivers, Caixas, etc).
+*No terminal:*
+```bash
 npm run dev
 
 ```
 
-*O servidor deve exibir: "Servidor rodando na porta 3000" e "MongoDB Conectado".*
 
-### 3. Configurar o Frontend
+*No navegador, acesse:*
+`http://localhost:3000/api/setup-categorias`
+*Se aparecer "Sucesso", o banco está pronto.*
 
-Abra um **segundo terminal** e navegue até a pasta do frontend:
+### 3. Configurar o Frontend (Interface)
 
+1. Abra um **novo terminal** e entre na pasta do frontend:
 ```bash
 cd frontend
 
-# Instalar dependências do React
+```
+
+
+2. **Instalar Dependências:**
+```bash
 npm install
 
-# Iniciar a aplicação (Porta 5173)
+```
+
+
+3. **(Opcional) Configurar Variáveis (.env):**
+Crie um arquivo `.env` dentro da pasta `frontend`:
+```ini
+VITE_API_URL=http://localhost:3000/api
+
+```
+
+
+4. **Rodar a Aplicação:**
+```bash
 npm run dev
 
 ```
 
-### 4. Acessar
+
+
+### 4. Acessar o Sistema
 
 Abra seu navegador em: `http://localhost:5173`
+
+* **Vitrine:** Tela inicial.
+* **Admin:** Clique no link de "Login" ou acesse `/login`.
+* *Dica: Crie um usuário ou remova a proteção de rota temporariamente se não tiver user cadastrado.*
+
+
 
 ---
 
@@ -96,25 +136,31 @@ Abra seu navegador em: `http://localhost:5173`
 
 ```
 vintage-audio-store/
-├── src/                # Lógica do Servidor (Backend)
+├── src/                # Backend (API)
 │   ├── models/         # Schemas do MongoDB (Produto, Categoria)
 │   └── ...
-├── frontend/           # Interface do Usuário (React)
+├── frontend/           # Frontend (React)
 │   ├── src/
-│   │   ├── components/ # Componentes (Navbar)
-│   │   ├── pages/      # Telas (Vitrine, Admin, Login, Detalhes, Dashboard)
+│   │   ├── components/ # Navbar, Cards
+│   │   ├── pages/      # Vitrine, Admin, Login, Dashboard
 │   │   └── api.js      # Configuração do Axios
 │   └── ...
-├── server.js           # Arquivo principal da API
+├── server.js           # Ponto de entrada da API
+├── .env                # Variáveis (Não incluso no Git)
 └── package.json        # Dependências
 
 ```
 
 ---
 
-## 📝 Autor
+## 📝 Autores
 
-Desenvolvido por **Ananias Carlos, Davi Carreiro, Michel Júnior & Sidney Nascimento**.
+Desenvolvido por:
+
+* **Ananias Carlos**
+* **Davi Carreiro**
+* **Michel Júnior**
+* **Sidney Nascimento**
+
 Projeto acadêmico para fins de estudo em Desenvolvimento Web Full Stack.
-
 
