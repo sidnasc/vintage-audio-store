@@ -105,15 +105,44 @@ function Admin() {
                 <label>Preço:</label>
                 <input name="preco" type="number" value={form.preco} onChange={handleChange} required />
               </div>
-              <div style={{ flex: 1 }}>
-                <label>Categoria:</label>
-                <select name="categoria" value={form.categoria} onChange={handleChange} required>
-                  <option value="">Selecione...</option>
-                  {categorias.map(cat => (
-                    <option key={cat._id} value={cat._id}>{cat.nome}</option>
-                  ))}
-                </select>
-              </div>
+            {/* Bloco de Categoria com Adição Rápida */}
+        <label>Categoria:</label>
+        <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '15px' }}>
+          
+          {/* O Select Original */}
+          <select 
+            name="categoria" 
+            value={form.categoria} 
+            onChange={handleChange} 
+            required
+            style={{ flex: 1, margin: 0 }} // Ajuste de estilo para ficar alinhado
+          >
+            <option value="">Selecione...</option>
+            {categorias.map(cat => (
+              <option key={cat._id} value={cat._id}>
+                {cat.nome}
+              </option>
+            ))}
+          </select>
+
+          {/* Novos Campos para Adicionar */}
+          <input 
+            type="text" 
+            placeholder="Nova Categoria..."
+            value={novaCategoria}
+            onChange={(e) => setNovaCategoria(e.target.value)}
+            style={{ width: '150px', margin: 0 }} 
+          />
+          
+          <button 
+            type="button" // IMPORTANTE: type="button" para não enviar o formulário principal
+            onClick={handleCriarCategoria}
+            className="btn-primary"
+            style={{ margin: 0, padding: '10px' }}
+          >
+            +
+          </button>
+        </div>
             </div>
 
             <label>Características / Descrição Técnica:</label>
