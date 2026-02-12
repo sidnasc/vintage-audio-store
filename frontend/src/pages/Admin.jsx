@@ -9,6 +9,7 @@ function Admin() {
     nome: '', marca: '', preco: '', imagemUrl: '', categoria: '', descricao: ''
   });
   const [categorias, setCategorias] = useState([]);
+  const [novaCategoria, setNovaCategoria] = useState("");
   const navigate = useNavigate();
   const { id } = useParams();
 
