@@ -117,5 +117,4 @@ vintage-audio-store/
 Desenvolvido por **Ananias Carlos, Davi Carreiro, Michel Júnior & Sidney Nascimento**.
 Projeto acadêmico para fins de estudo em Desenvolvimento Web Full Stack.
 
-```
 
